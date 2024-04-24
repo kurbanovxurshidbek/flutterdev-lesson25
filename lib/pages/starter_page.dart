@@ -1,23 +1,22 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:ngdemo19/conttrollers/starter_controller.dart';
 import 'package:get/get.dart';
-import '../conttrollers/home_controller.dart';
-import '../models/random_user_list_res.dart';
-import '../services/http_service.dart';
+
 import '../views/item_random_user.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class StarterPage extends StatefulWidget {
+  const StarterPage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<StarterPage> createState() => _StarterPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final _controller = Get.find<HomeController>();
+class _StarterPageState extends State<StarterPage> {
+  final _controller = Get.put(StarterController());
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
     _controller.initScrollListener();
     _controller.loadRandomUserList();
@@ -27,12 +26,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: const Text("Random Users - GetX(1)"),
+        title: const Text("Random Users - GetX(2)"),
       ),
-      body: GetBuilder<HomeController>(
-        builder: (controller) {
-          return Stack(
+      body: Obx(() => Stack(
             children: [
               ListView.builder(
                 controller: _controller.scrollController,
@@ -41,15 +37,13 @@ class _HomePageState extends State<HomePage> {
                   return itemOfRandomUser(_controller.userList[index], index);
                 },
               ),
-              _controller.isLoading
+              _controller.isLoading.value
                   ? const Center(
                       child: CircularProgressIndicator(),
                     )
                   : const SizedBox.shrink(),
             ],
-          );
-        },
-      ),
+          )),
     );
   }
 }
