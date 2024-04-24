@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:ngdemo19/pages/home_page.dart';
+import 'package:ngdemo19/pages/main_page.dart';
 import 'package:ngdemo19/pages/splash_page.dart';
 import 'package:ngdemo19/pages/starter_page.dart';
 import 'package:ngdemo19/services/di_service.dart';
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const SplashPage(),
+      home: const MainPage(),
       //initialBinding: RootBinding(),
     );
   }
